@@ -1,0 +1,49 @@
+<div ng-include="'template/header.html'"></div>
+<!--<ol class="breadcrumb" style="margin-bottom: 0;">-->
+    <!--<li class="active"><a href="#">首页</a></li>-->
+    <!--<li><a href="#">详情</a></li>-->
+<!--</ol>-->
+<!--<div class="container" style="border:1px solid #ccc">-->
+<!--<div class="media"  >-->
+    <!--<div class="media-heading" >-->
+        <!--<h2>【酸甜口味虾】</h2>-->
+        <!--<hr>-->
+        <!--<img src="img/p0281-l.jpg" alt="" class="img-responsive">-->
+    <!--</div>-->
+    <!--<div class="media-body">-->
+        <!--<p><b>主要材料：</b>哈哈哈江湖救急</p>-->
+        <!--<p>hdsgcfsjzcxnkzncbxmn坚持党的你吃饭看到你静电烦恼和v就是想你和 </p>-->
+    <!--</div>-->
+<!--</div>-->
+    <!--<div></div>-->
+<!--</div>-->
+
+
+
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <ol class="breadcrumb" style="margin-bottom: 0;">
+            <li class="active"><a href="#">首页</a></li>
+            <li><a href="#">详情</a></li>
+        </ol>
+    </div>
+    <div class="panel-body">
+        <div class="media" >
+            <div class="media-heading"  >
+                <h2>{{dish.name}}</h2>
+                <hr>
+                <img ng-src="img/{{dish.img_lg}}" alt="" class="img-responsive">
+            </div>
+            <div class="media-body">
+                <p><b>主要材料：</b>{{dish.materail}}</p>
+                <p>{{dish.detail}} </p>
+            </div>
+        </div>
+    </div>
+    <div class="panel-footer text-right">
+        <a class="btn btn-success " type="button" href="#order/{{dish.did}}">我要订餐</a>
+        <a class="btn btn-info " type="button"  href="#main">我再看看</a>
+    </div>
+</div>
+<div ng-include="'template/footer.html'"></div>

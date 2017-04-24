@@ -1,0 +1,22 @@
+{
+  "name": "kaifanle",
+  "version": "1.0.0",
+  "description": "chifan",
+  "main": "index.js",
+  "dependencies": {
+    "bignumber.js": "^3.1.2",
+    "core-util-is": "^1.0.2",
+    "express": "^4.15.2",
+    "isarray": "^0.0.1",
+    "mysql": "^2.13.0",
+    "readable-stream": "^1.1.14",
+    "sqlstring": "^2.2.0",
+    "string_decoder": "^0.10.31"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "yanxitan",
+  "license": "ISC"
+}

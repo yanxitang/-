@@ -1,0 +1,31 @@
+<div ng-include="'template/header.html'"></div>
+<div class="container">
+    <div class="form-group has-feedback">
+        <input type="text" placeholder="search" class="form-control" ng-model="searchText"
+               ng-keydown="searchDishes($event)">
+        <span class="glyphicon glyphicon-search form-control-feedback " ></span>
+    </div>
+    <ul class="list-group">
+        <li class="list-group-item" ng-repeat="dish in dishes">
+            <div class="media">
+                <div class="media-left">
+                    <a href="#detail/{{dish.did}}"><img ng-src="img/{{dish.img_sm}} " alt="" ></a>
+                </div>
+                <div class="media-body">
+                    <h4>{{dish.name}}</h4>
+                    <p>主要食材：{{dish.material}}</p>
+                    <hr>
+                    <p style="color:red">￥{{dish.price}}</p>
+                </div>
+            </div>
+        </li>
+
+    </ul>
+</div>
+<div ng-click="getMoreDishes()" class="text-center alert alert-warning" ng-show="loadStatus!=3">
+    <span ng-show="loadStatus===1">加载更多……</span> <span ng-show="loadStatus==2"><img src="img/loading_ajax.gif" alt="" ></span>
+</div>
+<div class="text-center alert alert-warning" ng-show="loadStatus===3">
+    <span >没有跟多</span>
+</div>
+<div ng-include="'template/footer.html'"></div>

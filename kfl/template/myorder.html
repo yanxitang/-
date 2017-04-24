@@ -1,0 +1,24 @@
+<div ng-include="'template/header.html'"></div>
+<div clas="panel">
+    <div class="panel-heading">
+        <h2 class="text-center" >订单管理</h2>
+    </div>
+    <div class="panel-body">
+        <table class="table table-striped orderTable" ng-show="hasorder">
+            <tr >
+                <th class="text-center">编号</th>
+                <th class="text-center">菜品</th>
+                <th class="text-center">下单时间</th>
+                <th class="text-center">联系人</th>
+            </tr>
+            <tr  class="text-center" ng-repeat="order in orders">
+                <td>{{order.oid}}</td>
+                <td><img ng-src="img/{{order.img_sm}}" alt=""></td>
+                <td>{{order.order_time}}</td>
+                <td>{{order.user_name}}</td>
+            </tr>
+        </table>
+    </div>
+    <div class="alert alert-danger text-center" ng-hide="hasorder">清闲点单</div>
+
+</div>
