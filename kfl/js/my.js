@@ -175,6 +175,41 @@ angular.module("myApp",["ng","ngRoute"])
             $scope.hasorder=false;
         }
     })
+    .controller("registerCtrl",function($scope,$http,$location){
+        $scope.userdata={};
+        $scope.register=function(){
+            var username=$scope.userdata.username;
+            var password=$scope.userdata.password;
+            $http.post("register",{
+                "username":username,
+                "password":password
+            }).then(function(data){
+                if($scope.signForm.$invalid){
+                    alert ('请检查你的信息');
+                    $location.path("/register")}
+                else
+                {$location.path('/login')}
+            })
+        }
+    })
+    .directive('compare',function(){
+        var o={};
+        o.strict='AE';
+        o.scope={
+            orgText:'=compare'
+        }
+        o.require='ngModel';
+        o.link=function (sco,ele,attr,con) {
+            con.$validators.compare=function (v) {
+                return v==sco.orgText;
+            }
+            sco.$watch('orgText',function () {
+                con.$validate();
+            })
+        }
+        return o;
+    })
+
     .controller("loginCtrl",function($scope,$http,$location){
         $scope.data={
             username:'',
@@ -191,22 +226,7 @@ angular.module("myApp",["ng","ngRoute"])
                })
         }
     })
-    .controller("registerCtrl",function($scope,$http,$location){
-        $scope.userdata={};
-        $scope.register=function(){
-            var username=$scope.userdata.username;
-            var password=$scope.userdata.password;
-            $http.post("register",{
-                "username":username,
-                "password":password
-            }).then(function(data){
-                if($scope.signForm.$invalid)
-                    alert ('请检查你的信息')
-                else
-                    $location.path('/login')
-            })
-        }
-    })
+
     .config(function($routeProvider) {
         $routeProvider
         .when('/start', {

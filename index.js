@@ -77,11 +77,26 @@ app.get("/getMyOrder",function (req,res) {
 
 })
 
-//使用post方式提交登陆信息
+//提交注册信息
+app.post('/register',function (req,res) {
+    console.log("提交注册信息");
+    //获得用户提交的表单数据
+    var user = {
+        username:req.query.username,
+        username:req.query.password
+    };
+    conn.query("insert into kf_user set ?",user,function(err,results ) {
+        if (err) throw err;
+        res.send({"result":results.insertId});
+    })
+
+});
+
+// 使用post方式提交登陆信息
 app.post('/login', function(req, res) {
     console.log("提交登陆信息");
     var user = req.body;
-    var sqlStr="select * from kfl_user where username='"+user.username+"' and password='"+user.password+"'";
+    var sqlStr="select * from kf_user where username='"+user.username+"' and password='"+user.password+"'";
     conn.query(sqlStr,function (err,result) {
         if(err) throw err;
         if (result.length>0){
@@ -95,22 +110,11 @@ app.post('/login', function(req, res) {
 
 
 });
-//提交注册信息
-app.post('/register',function (req,res) {
-    console.log("提交注册信息");
-    //获得用户提交的表单数据
-    var user = req.body;
-    conn.query('insert into kfl_user set ? ',user,function ( err,results ) {
-        if (err) throw err;
-        res.send({"result":results.insertId});
-    })
 
-});
 //注销用户登陆
 app.get('/logout',function (req,res) {
     req.session.user=null;
     console.log("退出登陆");
-    req.flash("success","用户登陆已注销");
     res.redirect("/");
 
 });
