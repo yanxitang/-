@@ -175,8 +175,38 @@ angular.module("myApp",["ng","ngRoute"])
             $scope.hasorder=false;
         }
     })
-    .controller("loginCtrl",function(){})
-    .controller("registerCtrl",function(){})
+    .controller("loginCtrl",function($scope,$http,$location){
+        $scope.data={
+            username:'',
+            password:''
+        };
+        $scope.login=function () {
+           $http.post("/login",$scope.userdata)
+               .then(function (data) {
+                   if(data.data=='error')
+                       alert('没有此用户')
+                   else
+                       $location.path('/main')
+
+               })
+        }
+    })
+    .controller("registerCtrl",function($scope,$http,$location){
+        $scope.userdata={};
+        $scope.register=function(){
+            var username=$scope.userdata.username;
+            var password=$scope.userdata.password;
+            $http.post("register",{
+                "username":username,
+                "password":password
+            }).then(function(data){
+                if($scope.signForm.$invalid)
+                    alert ('请检查你的信息')
+                else
+                    $location.path('/login')
+            })
+        }
+    })
     .config(function($routeProvider) {
         $routeProvider
         .when('/start', {
@@ -187,11 +217,11 @@ angular.module("myApp",["ng","ngRoute"])
             templateUrl:"template/main.html",
             controller: "mainCtrl"
         })
-        .when('/detail/:did',{
-            templateUrl:"template/detail.html",
-            controller: "detailCtrl"
-        })
-        .when('/order/:did',{
+            .when('/detail/:did',{
+                templateUrl:"template/detail.html",
+                controller: "detailCtrl"
+            })
+            .when('/order/:did',{
             templateUrl:"template/order1.html",
             controller: "orderCtrl"
         })
